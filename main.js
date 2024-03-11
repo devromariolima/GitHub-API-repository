@@ -12,7 +12,7 @@ function getApiGitHub(){
       hideDiv()
     }, 3000);
       throw new Error(res.status);
-      // chama a função apos 3 e segundos
+    
   }
 
   let data = await res.json();
@@ -88,3 +88,7 @@ function toggleDivRepositories ()  {
       hide.style.display = "none";
     
         }
+
+
+
+
