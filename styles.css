@@ -204,6 +204,29 @@ a {
    margin-left: 10px;
 }
 
+.pagination {
+   margin-top: 20px;
+   text-align: center;
+   display: none;
+   /* Oculta o menu de paginação inicialmente */
+}
+
+.pagination button {
+   padding: 5px 10px;
+   font-size: 14px;
+   cursor: pointer;
+   background-color: #007bff;
+   color: white;
+   border: none;
+   border-radius: 5px;
+   margin: 0 5px;
+}
+
+.pagination button:disabled {
+   background-color: #ccc;
+   cursor: not-allowed;
+}
+
 /* Responsividade */
 
 

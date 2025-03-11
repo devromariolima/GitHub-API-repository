@@ -1,5 +1,12 @@
 const repositories = document.querySelector('.content-main');
-const loading = document.getElementById('loading'); // Referência ao elemento de loading
+const loading = document.getElementById('loading');
+const prevPageButton = document.getElementById('prevPage');
+const nextPageButton = document.getElementById('nextPage');
+const pageInfo = document.getElementById('pageInfo');
+
+let currentPage = 1; // Página atual
+const itemsPerPage = 10; // Itens por página
+let allRepositories = []; // Armazena todos os repositórios carregados
 
 function getApiGitHub() {
   let User = document.getElementById("User").value;
@@ -29,52 +36,88 @@ function getApiGitHub() {
         return;
       }
 
-      // Limpa o conteúdo anterior
-      repositories.innerHTML = '';
+      // Armazena todos os repositórios
+      allRepositories = data;
 
-      data.map(item => {
-        console.log("Recebendo", item.language);
-        if (item?.language?.length > 0) {
-          let project = document.createElement('div');
-
-          project.innerHTML =
-            `
-    <div class="project">
-      <div>
-        <h4 class="title">${item.name}</h4>
-         <span class="date-create">${Intl.DateTimeFormat('pt-br').format(new Date(item.created_at))}</span>
-      </div>
-   <div>
-      <a id="url" href="${item.html_url}" target="_blank">${item.html_url}</a>
-      <span class="language"><span class="circle"></span>${item.language}</span>
-    </div>
-  </div> 
-  `;
-          repositories.appendChild(project);
-        }
-      });
+      // Exibe a primeira página
+      displayRepositories(currentPage);
     })
     .catch(error => {
       console.error("Erro na requisição:", error);
     })
     .finally(() => {
+      // Oculta o indicador de carregamento
       loading.style.display = 'none';
     });
 }
 
-function limpar() {
-  const list = document.getElementById("limpar");
-  list.replaceChildren();
+function displayRepositories(page) {
+  // Limpa o conteúdo anterior
+  repositories.innerHTML = '';
+
+  // Calcula o índice inicial e final dos itens da página
+  const startIndex = (page - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+
+  // Obtém os repositórios da página atual
+  const pageRepositories = allRepositories.slice(startIndex, endIndex);
+
+  // Exibe os repositórios
+  pageRepositories.forEach(item => {
+    if (item?.language?.length > 0) {
+      let project = document.createElement('div');
+
+      project.innerHTML =
+        `
+  <div class="project">
+    <div>
+      <h4 class="title">${item.name}</h4>
+       <span class="date-create">${Intl.DateTimeFormat('pt-br').format(new Date(item.created_at))}</span>
+    </div>
+ <div>
+    <a id="url" href="${item.html_url}" target="_blank">${item.html_url}</a>
+    <span class="language"><span class="circle"></span>${item.language}</span>
+  </div>
+</div> 
+`;
+      repositories.appendChild(project);
+    }
+  });
+
+  // Exibe o menu de paginação
+  document.querySelector('.pagination').style.display = 'block';
+
+  // Atualiza os controles de paginação
+  updatePaginationControls();
 }
 
-const container = document.getElementById('limpar');
-const btn = document.getElementById('btn');
+// Função para atualizar os controles de paginação
+function updatePaginationControls() {
+  // Atualiza o texto da página atual
+  pageInfo.textContent = `Página ${currentPage}`;
 
-btn.addEventListener('click', function handleClick() {
-  container.replaceChildren();
+  // Habilita/desabilita os botões de "Anterior" e "Próximo"
+  prevPageButton.disabled = currentPage === 1;
+  nextPageButton.disabled = currentPage === Math.ceil(allRepositories.length / itemsPerPage);
+}
+
+// Evento para a página anterior
+prevPageButton.addEventListener('click', () => {
+  if (currentPage > 1) {
+    currentPage--;
+    displayRepositories(currentPage);
+  }
 });
 
-// Função para usuário não encontrado
+// Evento para a próxima página
+nextPageButton.addEventListener('click', () => {
+  if (currentPage < Math.ceil(allRepositories.length / itemsPerPage)) {
+    currentPage++;
+    displayRepositories(currentPage);
+  }
+});
+
+// Funções de tratamento de erros (mantidas do seu código original)
 function toggleDiv() {
   var show = document.getElementById("alert");
   show.style.display = "block";
@@ -85,7 +128,6 @@ function hideDiv() {
   hide.style.display = "none";
 }
 
-// Função para repositórios não encontrados
 function toggleDivRepositories() {
   var show = document.getElementById("alert-repositories");
   show.style.display = "block";
