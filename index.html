@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,31 +8,31 @@
     <script src="main.js" defer></script>
     <title>API Github</title>
 </head>
+
 <body>
     <h1>GITHUB API</h1>
-
+    <div id="loading" class="loading">Carregando...</div>
     <div class="textfield">
-        <label for="User"></label> 
+        <label for="User"></label>
         <input type="text" id="User" placeholder="Informe seu Usuario" />
-        <button id="btn" class="btn-consultar" onclick="getApiGitHub()" >Consultar</button>
-        <button id="btn-2" class="btn-limpar"  onclick="limpar()">Limpar Dados</button>
+        <button id="btn" class="btn-consultar" onclick="getApiGitHub()">Consultar</button>
+        <button id="btn-2" class="btn-limpar" onclick="limpar()">Limpar Dados</button>
     </div>
 
-   <!-- Alert de usuario não encontrados -->
+    <!-- Alert de usuario não encontrados -->
     <div id="alert" class="alert">
-        <span class="closebtn"></span>  
-        <strong>Usuario não encontrado!</strong> 
+        <span class="closebtn"></span>
+        <strong>Usuario não encontrado!</strong>
     </div>
 
-<!-- Alert de repositorios não encontrados -->
+    <!-- Alert de repositorios não encontrados -->
     <div id="alert-repositories" class="alert-repositorios">
-        <span class="closebtn"></span>  
-        <strong>Este usuario não possui repositórios!</strong> 
+        <span class="closebtn"></span>
+        <strong>Este usuario não possui repositórios!</strong>
     </div>
 
 
     <main id="limpar" class="content-main"></main>
-   
+
 
 </body>
-

@@ -1,8 +1,7 @@
-
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;1,100;1,300&display=swap');
 
 
-*{
+* {
    margin: 0;
    padding: 0;
    box-sizing: border-box;
@@ -10,75 +9,75 @@
 
 }
 
-body{
-    background-color: #0d1117;
-    color: #fff;
+body {
+   background-color: #0d1117;
+   color: #fff;
 
 }
 
-h1{
-  text-align: center;
-  margin: 20px auto;
+h1 {
+   text-align: center;
+   margin: 20px auto;
 
 }
 
-a{
-text-decoration: none;
-color: #8b949e;
+a {
+   text-decoration: none;
+   color: #8b949e;
 
 
 }
 
-.content-main{
-    margin: 30px ;
+.content-main {
+   margin: 30px;
 
 }
 
-.content-main .project{
-    border: 1px solid #30363d;
-    display: flex;
-    flex-direction: column;
-    padding: 20px;
-    gap: 30px;
-    border-radius: 6px;
-    margin: 20px;
-    
+.content-main .project {
+   border: 1px solid #30363d;
+   display: flex;
+   flex-direction: column;
+   padding: 20px;
+   gap: 30px;
+   border-radius: 6px;
+   margin: 20px;
+
 }
 
-.content-main .project div{
+.content-main .project div {
    display: flex;
    justify-content: space-between;
-    
+
 }
 
-.content-main .project div .date-create{
+.content-main .project div .date-create {
    color: #8b949e;
    border: 1px solid #30363d;
    border-radius: 20px;
    padding: 5px 10px;
    font-size: 0.9rem;
-     
- }
 
- .content-main .project div .title{
+}
+
+.content-main .project div .title {
    color: #47a6f0;
 
- }
+}
 
- .content-main .project .language .circle{
-    background-color: #47a6f0;
-    display: inline-block;
-    width: 12px;
-    height: 12px;
-    margin-right: 5px;
-    border: 1px solid #30363d;
-    border-radius: 50%;
-    
- }
+.content-main .project .language .circle {
+   background-color: #47a6f0;
+   display: inline-block;
+   width: 12px;
+   height: 12px;
+   margin-right: 5px;
+   border: 1px solid #30363d;
+   border-radius: 50%;
 
-  /*estilização dos botôes*/
+}
 
-.textfield{
+/*estilização dos botôes*/
+
+.textfield {
    width: 100%;
    padding: 5px 5px;
    display: inline-block;
@@ -92,21 +91,21 @@ color: #8b949e;
    border-radius: 0;
    text-align: center;
    display: block;
-   
+
 }
 
-#User{
+#User {
    width: 15%;
    height: 50px;
-	margin: 0 auto;
-	padding: 10px;
-	border: none;
-	margin-bottom: 10px;
-	border-radius: 5px;
+   margin: 0 auto;
+   padding: 10px;
+   border: none;
+   margin-bottom: 10px;
+   border-radius: 5px;
 
 }
 
-.btn-limpar{
+.btn-limpar {
    border-color: #eb0303;
    width: 8%;
    height: 50px;
@@ -122,7 +121,7 @@ color: #8b949e;
 .btn-limpar:hover {
    box-shadow: 0 0 10px 0 #df0606 inset, 0 0 10px 4px #eb0303;
    color: #121111;
- }
+}
 
 
 .btn-consultar {
@@ -136,11 +135,12 @@ color: #8b949e;
    transition: all 150ms ease-in-out;
    font-weight: bold;
    font-size: 15px
- }
- .btn-consultar:hover {
+}
+
+.btn-consultar:hover {
    box-shadow: 0 0 10px 0 #3498db inset, 0 0 10px 4px #3498db;
    color: #121111;
- }
+}
 
 /* estilização dos alertas */
 
@@ -153,14 +153,14 @@ color: #8b949e;
    margin-bottom: 15px;
    display: none;
    transition: opacity 0.5s;
-   width:30%;
+   width: 30%;
    border-radius: 10px;
 
- }
+}
 
 /* estilização dos alertas*/
 
- .alert-repositorios {
+.alert-repositorios {
    padding: 20px;
    background-color: #DAA520;
    color: white;
@@ -169,68 +169,99 @@ color: #8b949e;
    margin-bottom: 15px;
    display: none;
    transition: opacity 0.5s;
-   width:30%;
+   width: 30%;
    border-radius: 10px;
 
- }
+}
 
- /* Responsividade */
+#loading {
+   display: none;
+   text-align: center;
+   font-size: 18px;
+   margin: 20px 0;
+   color: #eeecec;
+}
+
+@keyframes spin {
+   0% {
+      transform: rotate(0deg);
+   }
+
+   100% {
+      transform: rotate(360deg);
+   }
+}
+
+.loading::after {
+   content: '';
+   display: inline-block;
+   width: 20px;
+   height: 20px;
+   border: 3px solid #007bff;
+   border-top-color: transparent;
+   border-radius: 50%;
+   animation: spin 1s linear infinite;
+   margin-left: 10px;
+}
+
+/* Responsividade */
 
 
 @media(min-width:320px) and (max-width:900px) {
-   .language  {
-      font-size:12px;
-      
+   .language {
+      font-size: 12px;
+
    }
 }
 
 @media(min-width:320px) and (max-width:900px) {
    .alert {
       width: 100%;
-      
+
    }
 }
 
 @media(min-width:320px) and (max-width:900px) {
    .alert-repositorios {
       width: 100%;
-      
+
    }
 }
 
 @media(min-width:320px) and (max-width:900px) {
-   .circle  {
-      font-size:10px;
-      
+   .circle {
+      font-size: 10px;
+
    }
 }
+
 @media(min-width:320px) and (max-width:900px) {
-   .title  {
+   .title {
       padding: 10px;
-      
+
    }
 }
 
 
 @media(min-width:320px) and (max-width:900px) {
-   .content-main .project div{
-      display: flex; 
-      flex-direction: column; 
-      align-items: center; 
-      justify-content: center; 
+   .content-main .project div {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
    }
 }
 
 @media(min-width:320px) and (max-width:900px) {
-   #url{
+   #url {
       font-size: 12px;
       text-align: justify;
       padding: 5px 5px;
    }
 }
 
-  @media(min-width:320px) and (max-width:900px) {
-   #btn  {
+@media(min-width:320px) and (max-width:900px) {
+   #btn {
       width: 20%;
       font-size: 11px;
    }
@@ -241,7 +272,7 @@ color: #8b949e;
       width: 20%;
       font-size: 11px;
    }
-} 
+}
 
 @media(min-width:320px) and (max-width:900px) {
    #User {
@@ -249,4 +280,3 @@ color: #8b949e;
       font-size: 11px;
    }
 }
-
