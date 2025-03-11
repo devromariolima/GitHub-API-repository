@@ -8,6 +8,7 @@ let currentPage = 1; // Página atual
 const itemsPerPage = 10; // Itens por página
 let allRepositories = []; // Armazena todos os repositórios carregados
 
+// Função para buscar os repositórios do GitHub
 function getApiGitHub() {
   let User = document.getElementById("User").value;
 
@@ -15,6 +16,9 @@ function getApiGitHub() {
 
   // Exibe o indicador de carregamento
   loading.style.display = 'block';
+
+  // Oculta o menu de paginação enquanto carrega novos dados
+  document.querySelector('.pagination').style.display = 'none';
 
   fetch(`https://api.github.com/users/${User}/repos`)
     .then(async res => {
@@ -51,6 +55,7 @@ function getApiGitHub() {
     });
 }
 
+// Função para exibir os repositórios da página atual
 function displayRepositories(page) {
   // Limpa o conteúdo anterior
   repositories.innerHTML = '';
@@ -69,17 +74,17 @@ function displayRepositories(page) {
 
       project.innerHTML =
         `
-  <div class="project">
-    <div>
-      <h4 class="title">${item.name}</h4>
-       <span class="date-create">${Intl.DateTimeFormat('pt-br').format(new Date(item.created_at))}</span>
+    <div class="project">
+      <div>
+        <h4 class="title">${item.name}</h4>
+         <span class="date-create">${Intl.DateTimeFormat('pt-br').format(new Date(item.created_at))}</span>
+      </div>
+   <div>
+      <a id="url" href="${item.html_url}" target="_blank">${item.html_url}</a>
+      <span class="language"><span class="circle"></span>${item.language}</span>
     </div>
- <div>
-    <a id="url" href="${item.html_url}" target="_blank">${item.html_url}</a>
-    <span class="language"><span class="circle"></span>${item.language}</span>
-  </div>
-</div> 
-`;
+  </div> 
+  `;
       repositories.appendChild(project);
     }
   });
@@ -117,7 +122,32 @@ nextPageButton.addEventListener('click', () => {
   }
 });
 
-// Funções de tratamento de erros (mantidas do seu código original)
+// Função para limpar os dados e ocultar o menu de paginação
+function limpar() {
+  // Limpa o conteúdo dos repositórios
+  repositories.innerHTML = '';
+
+  // Limpa a lista de repositórios
+  allRepositories = [];
+
+  // Reseta a página atual
+  currentPage = 1;
+
+  // Oculta o menu de paginação
+  document.querySelector('.pagination').style.display = 'none';
+
+  // Atualiza os controles de paginação
+  updatePaginationControls();
+}
+
+// Evento para o botão de limpar
+const btn = document.getElementById('btn');
+
+btn.addEventListener('click', function handleClick() {
+  limpar(); // Chama a função limpar
+});
+
+// Função para exibir mensagem de usuário não encontrado
 function toggleDiv() {
   var show = document.getElementById("alert");
   show.style.display = "block";
@@ -128,6 +158,7 @@ function hideDiv() {
   hide.style.display = "none";
 }
 
+// Função para exibir mensagem de repositórios não encontrados
 function toggleDivRepositories() {
   var show = document.getElementById("alert-repositories");
   show.style.display = "block";
